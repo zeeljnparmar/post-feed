@@ -1,8 +1,7 @@
-const fs = require('fs').promises;
-const path = require('path');
-const { Mutex } = require('../utils/fileMutex');
+import fs from 'fs/promises';
+import { Mutex } from '../utils/fileMutex.js';
 
-const DATA_PATH = path.join(__dirname, '..', '..', 'data', 'posts.json');
+const DATA_PATH = new URL('../../data/posts.json', import.meta.url);
 const mutex = new Mutex();
 
 async function readAll() {
@@ -24,23 +23,23 @@ async function writeAll(posts) {
   }
 }
 
-async function addPost(post) {
+export async function addPost(post) {
   const posts = await readAll();
   posts.push(post);
   await writeAll(posts);
   return post;
 }
 
-async function getAllPosts() {
+export async function getAllPosts() {
   return await readAll();
 }
 
-async function getPostById(id) {
+export async function getPostById(id) {
   const posts = await readAll();
   return posts.find(p => p.id === id) || null;
 }
 
-module.exports = {
+export const postsRepo = {
   addPost,
   getAllPosts,
   getPostById

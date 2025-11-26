@@ -1,7 +1,7 @@
-const feedService = require('../services/feed.service');
+import {feedService} from '../services/feed.service.js'
 // Controller that manages Feed
 
-exports.getFeed = async (req, res) => {
+export const getFeed = async (req, res) => {
   try {
     const { cursor, limit } = req.body;
     const result = await feedService.getFeed({

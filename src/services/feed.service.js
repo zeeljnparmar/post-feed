@@ -1,10 +1,11 @@
-const postsRepo = require('../repositories/post.repo.js');
-const engagementRepo = require('../repositories/engagement.repo.js');
-const cache = require('../cache/cache.service');
-const { normalizeCursor } = require('../utils/cursor');
-const { formatReadableTimestamp } = require('../utils/dateFormatter');
+import {postsRepo} from '../repositories/post.repo.js';
+import {engagementRepo} from '../repositories/engagement.repo.js';
+import cache from '../cache/cache.service.js';
+import { normalizeCursor } from '../utils/cursor.js';
+import { formatReadableTimestamp } from '../utils/dateFormatter.js';
 
-async function getFeed({ cursor, limit = 10 }) {
+
+export async function getFeed({ cursor, limit = 10 }) {
   // Normalize cursor: if undefined -> +Infinity (fetch newest)
   const normCursor = normalizeCursor(cursor);
   const cacheKey = `feed:${normCursor}:${limit}`;
@@ -44,6 +45,6 @@ async function getFeed({ cursor, limit = 10 }) {
   return result;
 }
 
-module.exports = {
+export const feedService = {
   getFeed
 };

@@ -1,11 +1,12 @@
-const uuid = require('uuid').v4;
-const postsRepo = require('../repositories/post.repo.js');
-const engagementRepo = require('../repositories/engagement.repo.js');
-const cache = require('../cache/cache.service');
-const { formatReadableTimestamp } = require('../utils/dateFormatter');
+import { v4 as uuid } from 'uuid';
+import {postsRepo} from '../repositories/post.repo.js';
+import {engagementRepo} from '../repositories/engagement.repo.js';
+import cache from '../cache/cache.service.js';
+import { formatReadableTimestamp } from '../utils/dateFormatter.js';
+import {errorResponse} from '../utils/error.js'
 
 
-async function createPost({ userId, content, media }) {
+export async function createPost({ userId, content, media }) {
   const post = {
     id: uuid(),
     userId,
@@ -13,27 +14,36 @@ async function createPost({ userId, content, media }) {
     media: Array.isArray(media) ? media : (media ? [media] : []),
     timestamp: Date.now()
   };
-  await postsRepo.addPost(post);
-  // initialize engagement entry
-  await engagementRepo.initForPost(post.id);
-  // invalidate feed caches
-  cache.clearAllFeeds();
-  return post;
+  try {
+      await postsRepo.addPost(post);
+      // initialize engagement entry
+      await engagementRepo.initForPost(post.id);
+      // invalidate feed caches
+      cache.clearAllFeeds();
+      return post;
+  } catch (error) {  
+    console.log(error)
+    return errorResponse 
+  }
 }
 
-async function getPostById(id) {
-  const post = await postsRepo.getPostById(id);
-  if (!post) return null;
-  // attach engagement counts
-  const engagement = await engagementRepo.getEngagementCounts(id);
-  return {
-    ...post,
-    readableTimestamp: formatReadableTimestamp(post.timestamp),
-    engagement
-  };
+export async function getPostById(id) {
+  try{
+    const post = await postsRepo.getPostById(id);
+    if (!post) return null;
+    // attach engagement counts
+    const engagement = await engagementRepo.getEngagementCounts(id);
+    return {
+      ...post,
+      readableTimestamp: formatReadableTimestamp(post.timestamp),
+      engagement
+    };
+  }catch{
+     return errorResponse 
+  }
 }
 
-module.exports = {
+export const postService ={
   createPost,
   getPostById
 };

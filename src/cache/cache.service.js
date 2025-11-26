@@ -64,4 +64,5 @@ class CacheService {
 }
 
 //? Exporting instance like Redis
-module.exports = new CacheService();
+export const cache = new CacheService();
+export default cache;

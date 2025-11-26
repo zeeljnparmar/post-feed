@@ -1,8 +1,8 @@
-const engagementRepo = require('../repositories/engagement.repo.js');
-const postsRepo = require('../repositories/post.repo.js');
-const cache = require('../cache/cache.service');
+import {engagementRepo} from '../repositories/engagement.repo.js'
+import {postsRepo} from '../repositories/post.repo.js'
+import {cache} from '../cache/cache.service.js'
 
-async function like(postId, userId) {
+export async function like(postId, userId) {
   const post = await postsRepo.getPostById(postId);
   if (!post) throw new Error('post_not_found');
   const changed = await engagementRepo.addLike(postId, userId);
@@ -13,7 +13,7 @@ async function like(postId, userId) {
   return { postId, liked: changed };
 }
 
-async function unlike(postId, userId) {
+export async function unlike(postId, userId) {
   const post = await postsRepo.getPostById(postId);
   if (!post) throw new Error('post_not_found');
   const changed = await engagementRepo.removeLike(postId, userId);
@@ -24,7 +24,7 @@ async function unlike(postId, userId) {
   return { postId, liked: !changed ? false : true };
 }
 
-async function comment(postId, userId, text) {
+export async function comment(postId, userId, text) {
   const post = await postsRepo.getPostById(postId);
   if (!post) throw new Error('post_not_found');
   const comment = await engagementRepo.addComment(postId, userId, text);
@@ -35,7 +35,7 @@ async function comment(postId, userId, text) {
   return comment;
 }
 
-async function share(postId, userId) {
+export async function share(postId, userId) {
   const post = await postsRepo.getPostById(postId);
   if (!post) throw new Error('post_not_found');
   const count = await engagementRepo.incrementShare(postId);
@@ -46,7 +46,7 @@ async function share(postId, userId) {
   return { postId, shareCount: count };
 }
 
-module.exports = {
+export const engagementService={
   like,
   unlike,
   comment,

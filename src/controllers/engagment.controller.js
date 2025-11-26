@@ -1,73 +1,64 @@
-const engagementService = require('../services/engagement.service');
-const { validateFields } = require('../utils/validation');
+import * as engagementService from '../services/engagement.service.js';
+import { validateFields } from '../utils/validation.js';
 
-// Controlls to handle LIKE, UNLIKE, COMMENT and SHARE of post
-// This handles flow when a user likes a post
-
-exports.likePost = async (req, res) => {
+// Handles LIKE action for a post.
+export const likePost = async (req, res) => {
   try {
-    const { postId, userId } = req.body;
-    // Basic input validation
     if (!validateFields(req, res, ["postId", "userId"])) return;
 
+    const { postId, userId } = req.body;
     const result = await engagementService.like(postId, userId);
-    //? Sending Succes response
+
     return res.json(result);
 
   } catch (err) {
-    console.error(err);
-    //! Sending Error 
-    return res.status(500).json({ error: 'internal_error' });
+    console.error("Error in likePost:", err);
+    return res.status(500).json({ error: 'Unable to like' });
   }
 };
 
-exports.unlikePost = async (req, res) => {
+// Handles UNLIKE action.
+export const unlikePost = async (req, res) => {
   try {
-    const { postId, userId } = req.body;
-    // Basic input validation
-    if (!validateFields(req, res, ["postId", "userId"])) return;    
+    if (!validateFields(req, res, ["postId", "userId"])) return;
 
+    const { postId, userId } = req.body;
     const result = await engagementService.unlike(postId, userId);
-    //? Sending Succes response
+
     return res.status(201).json(result);
 
   } catch (err) {
-    console.error(err);
-    //! Sending Error 
+    console.error("Error in unlikePost:", err);
     return res.status(500).json({ error: 'internal_error' });
   }
 };
 
-exports.commentPost = async (req, res) => {
+//Handles adding a comment to a post.
+export const commentPost = async (req, res) => {
   try {
-    const { postId, userId, text } = req.body;
-    // Basic input validation
     if (!validateFields(req, res, ["postId", "userId", "text"])) return;
 
+    const { postId, userId, text } = req.body;
     const comment = await engagementService.comment(postId, userId, text);
-    //? Sending Succes response
+
     return res.status(201).json(comment);
 
   } catch (err) {
-    console.error(err);
-    //! Sending Error 
-    return res.status(500).json({ error: 'internal_error' });
+    console.error("Error in commentPost:", err);
+    return res.status(500).json({ error: 'Unable to add comment' });
   }
 };
 
-exports.sharePost = async (req, res) => {
+// Handles share action of a post
+export const sharePost = async (req, res) => {
   try {
-    const { postId, userId } = req.body;
-    // Basic input validation
     if (!validateFields(req, res, ["postId", "userId"])) return;
 
+    const { postId } = req.body;
     const result = await engagementService.share(postId);
-    //? Sending Succes response
     return res.json(result);
-
   } catch (err) {
-    console.error(err);
-    //! Sending Error 
-    return res.status(500).json({ error: 'internal_error' });
+    console.error("Error in sharePost:", err);
+    return res.status(500).json({ error: 'Unable to Share post' });
   }
 };

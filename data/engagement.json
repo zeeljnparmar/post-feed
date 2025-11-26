@@ -74,7 +74,8 @@
   },
   "3da890c5-736c-418f-a6b4-0ef3e0543afa": {
     "likes": [
-      101
+      101,
+      102
     ],
     "comments": [
       {
@@ -82,8 +83,19 @@
         "userId": 101,
         "text": "I love your Post",
         "timestamp": 1764137966933
+      },
+      {
+        "id": "1764146969360-buxxut",
+        "userId": 101,
+        "text": "I love your Post",
+        "timestamp": 1764146969360
       }
     ],
     "shareCount": 1
+  },
+  "83b37da5-f269-48e5-b52c-d120b8945a65": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
   }
 }
