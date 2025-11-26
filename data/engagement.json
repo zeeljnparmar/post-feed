@@ -8,5 +8,68 @@
     "likes": [],
     "comments": [],
     "shareCount": 0
+  },
+  "5cc72668-ed80-46e1-ae33-796036687c84": {
+    "likes": [],
+    "comments": [
+      {
+        "id": "1764135114246-7dvoc4",
+        "userId": 101,
+        "text": "This is and Awesome Post!",
+        "timestamp": 1764135114246
+      },
+      {
+        "id": "1764135589997-jkaara",
+        "userId": 101,
+        "text": "I love your Post",
+        "timestamp": 1764135589997
+      }
+    ],
+    "shareCount": 1
+  },
+  "32d67443-8eb7-415d-ad5b-aff69ae82558": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
+  },
+  "6bc1c46f-5215-451a-9b18-e4c19806d718": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
+  },
+  "a5d0d95a-88ff-4166-aaa5-126e7ed907a0": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
+  },
+  "557bf554-5853-4bc8-82fc-ba48c2a79aa7": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
+  },
+  "fd658d20-6f89-4acc-852e-f80c9ef5f375": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
+  },
+  "ec463f23-245c-48f2-8600-10a896aed390": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
+  },
+  "abd6f431-d3b9-4c78-9f3a-600cbdbdb929": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
+  },
+  "0c4a62ca-ce54-46ea-a42d-9ef6b8140ac1": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
+  },
+  "8e7483fa-21e2-41b0-b820-4cdd14a0ed8d": {
+    "likes": [],
+    "comments": [],
+    "shareCount": 0
   }
 }

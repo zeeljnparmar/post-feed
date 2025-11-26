@@ -87,7 +87,7 @@ async function getEngagementCounts(postId) {
   return {
     likeCount: entry.likes.length,
     shareCount: entry.shareCount || 0,
-    commentCount: entry.comments.length
+    commentCount: entry.comments
   };
 }
 
