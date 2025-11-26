@@ -187,6 +187,7 @@ This guarantees:
  - Works even when new posts are added
 
 ## 🚦caching_strategy:
+```
   cache_keys:
     feed_cache_key: "feed:<cursor>:<limit>"
     engagement_cache_key: "eng:<postId>"
@@ -203,10 +204,14 @@ This guarantees:
     - "Prevents stale feed pages"
     - "Keeps caching flexible and safe"
     - "Mirrors strategies used by Instagram / Twitter style feeds"
+```
+    
 ##🧩 Assumptions
+```
 User authentication is not implemented (mock userId used)
 Data is stored in JSON files (no database required for this task)
 Media is passed as URLs (no file upload in this version)
 Engagement operations are idempotent per user
 Cursor is based on timestamp (ms), ensuring stable pagination
 Cache is in-memory but easily replaceable with Redis
+```
