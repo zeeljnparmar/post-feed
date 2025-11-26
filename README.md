@@ -102,7 +102,7 @@ npm install
 ```
 npm run start
 ```
-Server will be available at : 3000
+Server will be available at PORT : 3000
 
 
 ---
