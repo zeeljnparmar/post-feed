@@ -1,0 +1,20 @@
+[
+  {
+    "id": "70cd8385-b5f4-4482-9d53-161e3773d96c",
+    "userId": 101,
+    "content": "My first post!",
+    "media": [
+      "https://example.com/image1.jpg"
+    ],
+    "timestamp": 1764131642919
+  },
+  {
+    "id": "af92d1c8-8058-4c79-823c-d863059a8055",
+    "userId": 101,
+    "content": "My Second post!",
+    "media": [
+      "https://example.com/image1.jpg"
+    ],
+    "timestamp": 1764131678318
+  }
+]
