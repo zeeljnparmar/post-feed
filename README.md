@@ -104,9 +104,20 @@ This guarantees:
  - No repeat posts
  - Works even when new posts are added
 
-## 🚦 Caching Strategy
-🔹 Feed Cache Key - feed:cursor:limit
-🔹 Engagement Cache Key - eng:postId
-🔹 Invalidation Rules
-  - New post → clear feed cache
-  - Like/comment/share → clear feed cache + engagement cache
+## 🚦caching_strategy:
+  cache_keys:
+    feed_cache_key: "feed:<cursor>:<limit>"
+    engagement_cache_key: "eng:<postId>"
+
+  invalidation_rules:
+    new_post:
+      - "clear_feed_cache"
+    engagement_update:   # like / unlike / comment / share
+      - "clear_feed_cache"
+      - "clear_engagement_cache_for_post"
+
+  why_this_strategy_works:
+    - "Ensures users always see the latest engagement numbers"
+    - "Prevents stale feed pages"
+    - "Keeps caching flexible and safe"
+    - "Mirrors strategies used by Instagram / Twitter style feeds"
