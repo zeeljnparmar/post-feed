@@ -1,9 +1,10 @@
 const postService = require('../services/post.service');
+const { validateFields } = require('../utils/validation');
 
 exports.createPost = async (req, res) => {
   try {
     const { userId, content, media } = req.body;
-    if (!userId || !content) return res.status(400).json({ error: 'userId and content required' });
+    if (!validateFields(req, res, ["userId", "content"])) return;
 
     const post = await postService.createPost({ userId, content, media });
     return res.status(201).json(post);
@@ -16,7 +17,8 @@ exports.createPost = async (req, res) => {
 exports.getPostById = async (req, res) => {
   try {
     const { postId } = req.body;
-    if (!postId) return res.status(400).json({ error: 'postId required' });
+    if (!validateFields(req, res, ["postId"])) return;
+
 
     const post = await postService.getPostById(postId);
     if (!post) return res.status(404).json({ error: 'not_found' });

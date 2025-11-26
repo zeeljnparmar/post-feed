@@ -1,11 +1,13 @@
 const engagementService = require('../services/engagement.service');
+const { validateFields } = require('../utils/validation');
 
+// Controlls to handle LIKE, UNLIKE, COMMENT and SHARE of post
+// This handles flow when a user likes a post
 exports.likePost = async (req, res) => {
   try {
     const { postId, userId } = req.body;
-
-    if (!postId || !userId)
-      return res.status(400).json({ error: 'postId and userId required' });
+    // Basic input validation
+    if (!validateFields(req, res, ["postId", "userId"])) return;
 
     const result = await engagementService.like(postId, userId);
     return res.json(result);
@@ -19,9 +21,8 @@ exports.likePost = async (req, res) => {
 exports.unlikePost = async (req, res) => {
   try {
     const { postId, userId } = req.body;
-
-    if (!postId || !userId)
-      return res.status(400).json({ error: 'postId and userId required' });
+    // Basic input validation
+    if (!validateFields(req, res, ["postId", "userId"])) return;    
 
     const result = await engagementService.unlike(postId, userId);
     return res.json(result);
@@ -35,9 +36,8 @@ exports.unlikePost = async (req, res) => {
 exports.commentPost = async (req, res) => {
   try {
     const { postId, userId, text } = req.body;
-
-    if (!postId || !userId || !text)
-      return res.status(400).json({ error: 'postId, userId and text required' });
+    // Basic input validation
+    if (!validateFields(req, res, ["postId", "userId", "text"])) return;
 
     const comment = await engagementService.comment(postId, userId, text);
     return res.status(201).json(comment);
@@ -51,9 +51,8 @@ exports.commentPost = async (req, res) => {
 exports.sharePost = async (req, res) => {
   try {
     const { postId, userId } = req.body;
-
-    if (!postId || !userId)
-      return res.status(400).json({ error: 'postId and userId required' });
+    // Basic input validation
+    if (!validateFields(req, res, ["postId", "userId"])) return;
 
     const result = await engagementService.share(postId);
     return res.json(result);
